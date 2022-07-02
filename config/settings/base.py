@@ -80,7 +80,7 @@ THIRD_PARTY_APPS = [
 
 LOCAL_APPS = [
     "inarikun.users",
-    # Your stuff: custom apps go here
+    "blog.apps.BlogConfig",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -287,7 +287,7 @@ ACCOUNT_AUTHENTICATION_METHOD = "username"
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 ACCOUNT_EMAIL_REQUIRED = True
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_EMAIL_VERIFICATION = False
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 ACCOUNT_ADAPTER = "inarikun.users.adapters.AccountAdapter"
 # https://django-allauth.readthedocs.io/en/latest/forms.html
