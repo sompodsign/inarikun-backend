@@ -30,7 +30,7 @@ class Topic(UUIDMixin):
         return self.name
 
 
-class Post(UUIDMixin):
+class Article(UUIDMixin):
     """
     Post model
     * Represent a blog post in a topic
@@ -50,8 +50,16 @@ class Post(UUIDMixin):
         return self.title
 
 
+class ArticleTag(models.Model):
+    name = models.CharField(max_length=30)
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+
 class PostImage(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey(Article, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='blog/images/')
 
 
@@ -62,7 +70,7 @@ class Comment(UUIDMixin):
     """
     body = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey(Article, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.body
