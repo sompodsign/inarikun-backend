@@ -44,7 +44,7 @@ class Article(UUIDMixin):
     title = models.CharField(max_length=255)
     content = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
+    topic = models.ForeignKey(Topic, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.title
@@ -52,7 +52,7 @@ class Article(UUIDMixin):
 
 class ArticleTag(models.Model):
     name = models.CharField(max_length=30)
-    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    article = models.ManyToManyField(Article)
 
     def __str__(self):
         return self.name

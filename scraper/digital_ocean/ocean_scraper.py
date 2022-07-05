@@ -1,8 +1,4 @@
-import time
-
-from pandas.errors import EmptyDataError
-
-from digital_ocean.digital_ocean_selenium import DigitalOcean
+from ..digital_ocean.digital_ocean_selenium import DigitalOcean
 import csv
 import pandas as pd
 
@@ -16,10 +12,10 @@ def is_last_page(total_amount, current_amount):
 
 
 def store_in_csv(tutorial_href):
-    file = open('digital_ocean_tutorials.csv', 'a')
+    file = open('.digital_ocean_tutorials.csv', 'a')
     writer = csv.writer(file)
 
-    existing_links = pd.read_csv('digital_ocean_tutorials.csv')['href'].to_list()
+    existing_links = pd.read_csv('./digital_ocean_tutorials.csv')['href'].to_list()
     if tutorial_href and tutorial_href not in existing_links:
         print("new link: " + tutorial_href)
         writer.writerow([tutorial_href])

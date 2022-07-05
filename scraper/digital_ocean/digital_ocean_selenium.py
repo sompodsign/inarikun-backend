@@ -3,7 +3,7 @@ import time
 
 from selenium.webdriver.common.by import By
 
-from base import BaseScraper
+from ..base import BaseScraper
 
 
 class DigitalOcean(BaseScraper):
