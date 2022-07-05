@@ -52,7 +52,7 @@ class Article(UUIDMixin):
 
 class ArticleTag(models.Model):
     name = models.CharField(max_length=30)
-    article = models.ManyToManyField(Article)
+    article = models.ManyToManyField(Article, related_name='articletag_set')
 
     def __str__(self):
         return self.name

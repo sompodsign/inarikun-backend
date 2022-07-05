@@ -1,3 +1,4 @@
+from blog.models import Article
 from ..digital_ocean.digital_ocean_selenium import DigitalOcean
 import csv
 import pandas as pd
@@ -40,4 +41,3 @@ while True:
     else:
         break
 
-digitalOcean.close()

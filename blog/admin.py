@@ -41,7 +41,7 @@ class ArticleAdmin(admin.ModelAdmin):
 
 @admin.register(ArticleTag)
 class ArticleTagAdmin(admin.ModelAdmin):
-    list_display = ['name', 'article']
+    list_display = ['name']
 
 
 @admin.register(Comment)
