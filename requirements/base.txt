@@ -23,3 +23,10 @@ djangorestframework==3.13.1  # https://github.com/encode/django-rest-framework
 django-cors-headers==3.13.0 # https://github.com/adamchainz/django-cors-headers
 # DRF-spectacular for api documentation
 drf-spectacular==0.22.1  # https://github.com/tfranzel/drf-spectacular
+
+# Scraping
+# ------------------------------------------------------------------------------
+selenium==4.3.0
+webdriver-manager==3.7.1
+beautifulsoup4==4.11.1
+pandas==1.4.3
