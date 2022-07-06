@@ -16,7 +16,7 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/node_modules" />
     </content>
-    <orderEntry type="jdk" jdkName="Remote Python 3.9.13 Docker Compose (django at [C:\Users\sompo\Desktop\Projects\inarikun\backend\inarikun\local.yml])" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Remote Python 3.9.13 Docker Compose (django at [/home/shampad/Desktop/Projects/inarikun-backend/local.yml])" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="PackageRequirementsSettings">
