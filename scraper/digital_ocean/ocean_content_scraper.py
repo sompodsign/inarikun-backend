@@ -30,19 +30,27 @@ def get_tutorial_links(csv):
 
 def save_tutorial_content_in_db(tutorial_content):
     """save content in db"""
-    article = Article(
-        title=tutorial_content['title'],
-        content=tutorial_content['content'],
-        author=User.objects.get(username='shampad'),
-    )
-    article.save()
-    for tag in tutorial_content['tags']:
-        existing_tags = ArticleTag.objects.all()
-        if tag in [existing_tag.name for existing_tag in existing_tags]:
-            article.articletag_set.add(existing_tags.get(name=tag))
-        else:
-            article.articletag_set.create(name=tag)
-    article.save()
+    existing_tutorials = [article.title.strip().lower() for article in Article.objects.all()]
+    if tutorial_content['title'].strip().lower() not in existing_tutorials:
+        try:
+            article = Article(
+                title=tutorial_content['title'],
+                content=tutorial_content['content'],
+                author=User.objects.get(username='shampad'),
+            )
+            article.save()
+            for tag in tutorial_content['tags']:
+                existing_tags = ArticleTag.objects.all()
+                if tag in [existing_tag.name for existing_tag in existing_tags]:
+                    article.articletag_set.add(existing_tags.get(name=tag))
+                else:
+                    article.articletag_set.create(name=tag)
+            article.save()
+            return True
+        except Exception as e:
+            logging.error(f'Error while saving article: {e}')
+            return False
+
 
 
 def get_and_save_content():
@@ -51,7 +59,10 @@ def get_and_save_content():
     for i in range(len(links)):
         print(f'{i+1}/{len(links)}')
         tutorial_content = get_content(links[i])
-        save_tutorial_content_in_db(tutorial_content)
+        is_saved = save_tutorial_content_in_db(tutorial_content)
+        if not is_saved:
+            continue
+
 
 
 def get_new_articles():
@@ -82,4 +93,3 @@ def get_new_articles_content_and_save_to_db():
         logging.info(f'{len(new_articles)} new articles found and saved')
     else:
         logging.info('No new articles found')
-
