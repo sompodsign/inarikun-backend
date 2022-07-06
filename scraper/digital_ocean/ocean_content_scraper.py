@@ -6,7 +6,7 @@ import pandas as pd
 
 from ..bs_base import BaseSoupScraper
 
-from blog.models import Category, Article, ArticleTag
+from blog.models import Article, ArticleTag
 
 User = get_user_model()
 

@@ -6,7 +6,8 @@ class BaseSoupScraper:
 
     def __init__(self, url):
         self.url = url
-        self.soup = BeautifulSoup(requests.get(url).text, 'html.parser')
+        response = requests.get(url)
+        self.soup = BeautifulSoup(response.content.decode('utf-8'), 'html.parser')
 
     def get_title(self):
         return self.soup.title.text
