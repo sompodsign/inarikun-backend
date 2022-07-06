@@ -46,6 +46,9 @@ class Article(UUIDMixin):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE, blank=True, null=True)
 
+    def get_url(self):
+        return f"/blog/{self.id}"
+
     def __str__(self):
         return self.title
 
