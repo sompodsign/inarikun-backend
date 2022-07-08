@@ -1,4 +1,7 @@
 from django.db import models
+from django.urls import reverse
+from django.utils import timezone
+
 from core.models import UUIDMixin
 from django.contrib.auth import get_user_model
 
@@ -45,9 +48,17 @@ class Article(UUIDMixin):
     content = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE, blank=True, null=True)
+    publish = models.DateTimeField(default=timezone.now())
+    slug = models.SlugField(max_length=250,
+                            unique_for_date='publish')
 
-    def get_url(self):
-        return f"/blog/{self.id}"
+    def get_absolute_url(self):
+        return reverse('article:detail', args=[
+            self.publish.year,
+            self.publish.month,
+            self.publish.day,
+            self.slug
+        ])
 
     def __str__(self):
         return self.title
