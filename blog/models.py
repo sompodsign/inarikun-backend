@@ -8,6 +8,14 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
+class PublishedManager(models.Manager):
+    """
+    Custom manager to filter tutorials which are only published
+    """
+    def get_queryset(self):
+        return super().get_queryset().filter(status='published')
+
+
 class Category(UUIDMixin):
     """
     Category model
@@ -44,6 +52,11 @@ class Article(UUIDMixin):
     * Has a created_at timestamp
     * Has an updated_at (auto_now)
     """
+    STATUS_CHOICES = (
+        ('draft', 'Draft'),
+        ('published', 'Published'),
+    )
+
     title = models.CharField(max_length=255)
     content = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -51,6 +64,12 @@ class Article(UUIDMixin):
     publish = models.DateTimeField(default=timezone.now())
     slug = models.SlugField(max_length=250,
                             unique_for_date='publish')
+    status = models.CharField(max_length=10,
+                              choices=STATUS_CHOICES,
+                              default='published')
+    update = models.BooleanField(max_length=10, default=False)  # to identify updated or posted.
+    objects = models.Manager()
+    published = PublishedManager()
 
     def get_absolute_url(self):
         return reverse('article:detail', args=[
