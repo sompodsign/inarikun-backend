@@ -61,7 +61,7 @@ class Article(UUIDMixin):
     content = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE, blank=True, null=True)
-    publish = models.DateTimeField(default=timezone.now())
+    publish = models.DateTimeField(default=timezone.now)
     slug = models.SlugField(max_length=250,
                             unique_for_date='publish')
     status = models.CharField(max_length=10,
